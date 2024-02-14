@@ -1,0 +1,6 @@
+.DS_Store
+.direnv
+.env
+__pycache__
+*.blend1
+tmp

@@ -1,0 +1,22 @@
+#!/bin/bash
+
+process_count=$1
+image_count=$2
+split=$3
+
+mkdir -p "./tmp/dataset/$3"
+if [ ! -f "./tmp/dataset/$3/metadata.csv" ]; then
+  echo "file_name,normalized_distance,normalized_angle,is_target_visible,thrower_x,thrower_y,thrower_z,thrower_rotation_z,target_x,target_y,target_z" >"./tmp/dataset/$3/metadata.csv"
+fi
+
+command_string="python source/dataset/generate.py $image_count $split"
+
+tmux new-session -ds dataset-generate "$command_string"
+tmux select-window -t dataset-generate:0
+for _ in $(seq 2 "$process_count"); do
+  tmux split-window "$command_string"
+  tmux select-layout even-vertical
+done
+caffeinate -dims tmux attach-session -t dataset-generate
+
+gum confirm "Upload to HuggingFace?" && python source/dataset/push.py && gum confirm "Delete local files?" && rm -r "./tmp/dataset/$3"

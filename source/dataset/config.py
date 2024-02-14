@@ -1,0 +1,9 @@
+field_length = 10
+field_width = 6
+interocular_distance = 0.15
+focal_length = 4.74
+f_stop = 1.8
+focus_distance = 10
+sensor_width = 6.45
+resolution_x = 256
+resolution_y = 144

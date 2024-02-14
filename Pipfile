@@ -1,0 +1,20 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+huggingface-hub = {extras = ["cli"], version = "*"}
+torch = "*"
+numpy = "*"
+torchvision = "*"
+pandas = "*"
+pyarrow = "*"
+tqdm = "*"
+imageio = "*"
+matplotlib = "*"
+bpy = "*"
+datasets = "*"
+
+[requires]
+python_version = "3.10"
